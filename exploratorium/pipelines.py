@@ -1,13 +1,21 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-
-# useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from scrapy.exceptions import DropItem
 
 
 class ExploratoriumPipeline:
+
     def process_item(self, item, spider):
-        return item
+        adapter = ItemAdapter(item)
+        if spider.name == 'exhibits':
+            if adapter.get('title'):
+                if adapter.get('id') in ['es', 'zht', 'fil']:
+                    raise DropItem(f'Non-English language in {item}')
+            else:
+                raise DropItem(f"Missing title in {item}")
+            return item
+        elif spider.name == 'galleries':
+            if adapter.get('title'):
+                del adapter['curator_url']
+                return item
+            else:
+                raise DropItem(f"Missing title in {item}")
