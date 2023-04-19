@@ -4,8 +4,8 @@ This repo contains a simple [Scrapy](https://scrapy.org/) project for scraping e
 [exploratorium.edu](https://www.exploratorium.edu), the official webpage of the Exploratorium. 
 This project is Part 1 of [Explorer AI](https://github.com/kristenvonbecker/Explorer_AI).
 
-The spiders `exhibits.py` and `galleries.py` defined in `exploratorium/spiders/`, scrape the following data from 
-the landing pages for the museum's [exhibits](https://www.exploratorium.edu/exhibits/all) and 
+The spiders `exhibits.py` and `galleries.py` defined in `exploratorium/spiders/`, scrape the following raw text data 
+from the landing pages for the museum's [exhibits](https://www.exploratorium.edu/exhibits/all) and 
 [galleries](https://www.exploratorium.edu/visit/galleries), respectively.
 
   - Each item in the exhibit-level data (i.e. each exhibit) has the following fields:
@@ -35,4 +35,6 @@ currently on view
     - `curator_url` gives a link to the curators' statement
     - `curator_statement` gives the curators' names and their statement about the gallery
     
-The `json` files containing this data are located in `data/`.
+The `json` files containing this data are located in `data/text`.
+
+In a following update, this project will also include image-scraping framework from the same websites referenced above.
